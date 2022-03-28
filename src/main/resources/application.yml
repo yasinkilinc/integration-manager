@@ -1,0 +1,75 @@
+server:
+  port: ${PORT}
+
+spring:
+  main:
+    banner-mode: "off"
+  profiles:
+    active: prod
+  datasource:
+    url: "jdbc:sqlserver://${DB_HOST};instanceName=${INSTANCE_NAME};databaseName=${DB_NAME}"
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 120000
+      connectionTimeout: 300000
+      leakDetectionThreshold: 300000
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      platform: mssql
+      schema_update:
+        unique_constraint_strategy: SKIP # RECREATE_QUIETLY
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2008Dialect
+        format_sql: false
+      #temp.use_jdbc_metadata_defaults: false
+#    open-in-view: false
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+
+app:
+  business:
+    firma-kod: "D25974F9-8EBE-4F2F-B44E-6FA390CC9C79"
+    kullanici-kod: "AMAZONTRP"
+    departman-id: "6AA65C7B-F669-4A0C-82F1-0B504EC58A43"
+    etd-tarihi: "CEAB79B3-2689-4287-A989-3AC2F0D3E8EE"
+    tahmini-varis-tarihi: "44410A12-5A9C-4442-BDA8-18DFD1BA3C45"
+    save-path: ${APP_SAVE_PATH}
+    fixedDelayString: ${FIXED_RATE}
+    mail-to-success: ${MAIL_TO_SUCCESS}
+    mail-to-fail: ${MAIL_TO_FAIL}
+    mail-from: ${MAIL_FROM}
+    mail-subject: ${MAIL_SUBJECT}
+    beyanname-kullanici-kod: "AHMETKA"
+
+## OpenApi Settings ##
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: "/docs/swagger-ui.html"
+
+openapi:
+  app:
+    title: "Integration Manager API"
+    description: "This api includes document operations for Integration Manager project"
+    version: 1.0
+    contact : "Contact Support"
+    email: "cnm.support@atez.com.tr"
+    licence: "IM 1.0"
+    url: "https://www.atez.com.tr"
+

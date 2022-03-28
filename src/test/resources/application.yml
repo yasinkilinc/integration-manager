@@ -1,0 +1,58 @@
+
+server:
+  port: ${PORT}
+
+spring:
+  main:
+    banner-mode: "off"
+  profiles:
+    active: dev
+  datasource:
+    url: "jdbc:sqlserver://${DB_HOST};instanceName=${INSTANCE_NAME};databaseName=${DB_NAME}"
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      connectionTimeout: 5000
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      platform: mssql
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2008Dialect
+        format_sql: false
+      #temp.use_jdbc_metadata_defaults: false
+#    open-in-view: false
+
+
+app:
+  sftp:
+    host: 192.168.0.198
+    port: 22
+    user: AMAZONTEST
+    password: "8vz1.cx!"
+    directory: "test-amazon-data"
+    privateKeyPassPhrase:
+    privateKey:
+  scheduler:
+    thread-size: 10
+    thread-pool-size: 2
+
+## OpenApi Settings ##
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: "/docs/swagger-ui.html"
+
+openapi:
+  app:
+    title: "Integration Manager API"
+    description: "This api includes document operations for Integration Manager project"
+    version: 1.0
+    contact : "Contact Support"
+    email: "cnm.support@atez.com.tr"
+    licence: "IM 1.0"
+    url: "https://www.atez.com.tr"
